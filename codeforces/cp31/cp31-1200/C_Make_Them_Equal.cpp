@@ -5,17 +5,29 @@ using namespace std;
 
 void solve() {
     int n;
-    cin >> n;
     char c;
-    cin >> c;
+    cin >> n >> c;
     string s;
     cin >> s;
-    vector<int> a;
-    for(int i = 0; i < n; i++) {
-        if(s[i] != c) a.push_back(i + 1);
+    if(count(s.begin(), s.end(), c) == n) {
+        cout << 0 << endl;
+        return;
     }
-    int count = 0;
-    
+    vector<int> res;
+    for(int x = 1; x <= n; ++x) {
+        bool ok = true;
+        for(int i = x; i <= n; i += x) {
+            if(s[i-1] != c) {
+                ok = false;
+                break;
+            }
+        }
+        if(ok) {
+            cout << 1 << endl << x << endl;
+            return;
+        }
+    }
+    cout << 2 << endl << n << " " << n-1 << endl;
 }
 
 signed main() {
